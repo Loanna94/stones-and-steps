@@ -287,7 +287,8 @@
   function drawNature(){
     if(state.chapter===0){
       sourceDraw(art[10],111,832,225,248,4,92,133,147,.65);
-      sourceDraw(art[10],811,881,167,202,680,218,103,125,.7);
+      // Right tree: clip away the sun and the hashtag text that sit next to it in comic 10.
+      if(art[10]){const k=103/167,m=(x,y)=>[680+(x-811)*k,218+(y-881)*k];ctx.save();ctx.beginPath();[[853,881],[978,881],[978,1072],[811,1072],[811,948],[833,923],[850,915]].forEach((pt,i)=>{const [px,py]=m(pt[0],pt[1]);if(i)ctx.lineTo(px,py);else ctx.moveTo(px,py);});ctx.closePath();ctx.clip();sourceDraw(art[10],811,881,167,191,680,218,103,191*k,.7);ctx.restore();}
       sourceDraw(art[10],111,832,225,248,-10,477,135,148,.5);
       return;
     }
@@ -461,7 +462,7 @@
       ctx.beginPath();ctx.ellipse(x,item.y+4,44+bloom,20+bloom*.4,0,0,Math.PI*2);ctx.fill();ctx.stroke();
       if(item.activated){ctx.strokeStyle='#e3c274';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(x,item.y+4,34,13,0,0,Math.PI*2);ctx.stroke();}
       ctx.font='21px sans-serif';ctx.textAlign='center';ctx.fillStyle=item.activated?'#2f7350':'#587645';ctx.fillText(item.activated?'✧':'✳',x,item.y+11);
-    }else if(art[4])sourceDraw(art[4],718,1080,99,65,x-size/2,item.y-22,size,size*65/99,item.bypassed?.55:item.yielding?.55:item.met?.38:1);
+    }else if(art[4])sourceDraw(art[4],709,1081,98,64,x-size/2,item.y-22,size,size*64/98,item.bypassed?.55:item.yielding?.55:item.met?.38:1);
     else{ctx.fillStyle='#9eaa94';ctx.beginPath();ctx.ellipse(x,item.y,28,17,0,0,Math.PI*2);ctx.fill();}
   }
   function frame(now){const dt=last?Math.min((now-last)/1000,.05):0;last=now;update(dt);draw();requestAnimationFrame(frame);}
