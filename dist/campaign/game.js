@@ -5,8 +5,8 @@
   const W = 800, H = 700, playerY = 557;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const art = {};
-  for (let n = 1; n <= 10; n++) { const im = new Image(); im.onload = () => { art[n] = im; }; im.src = `assets/comic-${String(n).padStart(2, '0')}.png`; }
-  const nature = new Image();nature.onload=()=>{art.nature=nature;};nature.src='assets/nature-atlas.png';
+  for (let n = 1; n <= 10; n++) { const im = new Image(); im.onload = () => { art[n] = im; }; im.src = `assets/comic-${String(n).padStart(2, '0')}.webp`; }
+  const nature = new Image();nature.onload=()=>{art.nature=nature;};nature.src='assets/nature-atlas.webp';
   const natureCrops={tree:[96,43,328,442],grass:[553,284,431,168],smallGrass:[1132,307,310,145],fruitTree:[96,549,328,437],flowers:[583,760,358,176],flowerPatch:[1069,783,416,159]};
   const titles = ['마음의 신호 알아차리기', '함께 걸으면, 달라지는 길', '나의 방식으로 지나가기'];
   const locations = ['낯선 돌멩이를 만나는 길', '초록이 짙어지는 숲길', '꽃과 열매가 함께하는 길'];
@@ -534,7 +534,7 @@
     const [start,end]=stageComicRanges[story.chapter],lastPage=story.page===end-1;
     $('stage-comic-kicker').textContent=`STAGE 0${story.chapter+1} · 잠깐 읽는 이야기`;
     $('stage-comic-heading').textContent=['첫 번째 길에서 만난 마음','함께 걷는다는 것','나의 속도로, 다음 걸음'][story.chapter];
-    $('stage-comic-image').src=`assets/comic-${String(story.page+1).padStart(2,'0')}.png`;
+    $('stage-comic-image').src=`assets/comic-${String(story.page+1).padStart(2,'0')}.webp`;
     $('stage-comic-image').alt=comicCaptions[story.page];
     $('stage-comic-caption').textContent=comicCaptions[story.page];
     $('stage-comic-page').textContent=`${story.page-start+1} / ${end-start}장 · 전체 ${story.page+1} / 10`;
@@ -564,7 +564,7 @@
   $('stage-comic-image').addEventListener('pointerup',event=>{if(!storyPointer)return;const dx=event.clientX-storyPointer.x,dy=event.clientY-storyPointer.y;storyPointer=null;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0)nextStageComic();else previousStageComic();}});
   $('stage-comic-image').addEventListener('pointercancel',()=>{storyPointer=null;});
   function renderComic(){
-    $('comic-image').src=`assets/comic-${String(comicPage+1).padStart(2,'0')}.png`;
+    $('comic-image').src=`assets/comic-${String(comicPage+1).padStart(2,'0')}.webp`;
     $('comic-image').alt=comicCaptions[comicPage];$('comic-caption').textContent=comicCaptions[comicPage];
     $('comic-page').textContent=`${comicPage+1} / 10`;$('comic-prev').disabled=comicPage===0;$('comic-next').disabled=comicPage===9;
   }
